@@ -1,4 +1,5 @@
-import os
+import text_operation as TO
+
 from langchain_community.document_loaders import TextLoader
 from langchain_openai import OpenAIEmbeddings
 from langchain_text_splitters import CharacterTextSplitter
@@ -25,25 +26,9 @@ prompt = ChatPromptTemplate.from_messages([
 ])
 chain = prompt | llm | output_parser
 
-def list_files(directory):
-    """
-    递归列出指定目录及其子目录下的所有文件名
-    """
-    file_list = []
-    for root, dirs, files in os.walk(directory):
-        for file in files:
-            file_list.append(os.path.join(root, file))
-    return file_list
-file_list =  list_files(directory_path)
-text = ""
-for file_name in file_list:
-    text += ("\n" + file_name + ":")
-    with open(file_name, 'r') as file:
-        text += file.read()
-    text += "\n ''' \n"
+# 获取文本文件
+file_list,text =  TO.list_files(directory_path)
 
-with open("all.txt", 'w') as file:
-    file.write(text)
 
 raw_documents = TextLoader('all.txt').load()
 text_splitter = CharacterTextSplitter(chunk_size=1000, chunk_overlap=0)
