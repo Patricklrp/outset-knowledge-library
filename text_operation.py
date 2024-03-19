@@ -1,8 +1,15 @@
 import os
 
-def list_files(directory):
-    """
-    递归列出指定目录及其子目录下的所有文件名,并获取所有文本,生成all.txt
+def list_files(directory, write_path):
+    """获取指定目录下的所有文本文件，并写入汇总于单个文本
+
+    Args:
+        directory (str): 目标文本顶层目录路径
+        write_path (str): 写入文本路径
+
+    Returns:
+        str: file_list
+        str: text
     """
     file_list = []
     text = ""
@@ -15,6 +22,6 @@ def list_files(directory):
         with open(file_name, 'r') as file:
             text += file.read()
         text += "\n ''' \n"
-    with open("all.txt", 'w') as file:
+    with open(write_path, 'w') as file:
         file.write(text)
     return file_list,text

@@ -1,3 +1,6 @@
+'''
+基于sentenceTramsformer，手动编码并匹配向量，效果不佳，已停用
+'''
 from openai import OpenAI
 import os
 
