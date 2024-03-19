@@ -1,3 +1,5 @@
+import os
+
 import text_operation as TO
 
 from langchain_community.document_loaders import TextLoader
