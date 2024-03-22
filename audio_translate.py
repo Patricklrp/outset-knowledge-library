@@ -122,8 +122,8 @@ def text2audio(text):
     engine.setProperty('volume',0.6) # 音量
      
     # voices = engine.getProperty('voices') # 获取语音合成器
-    for voice in voices:
-        print(voice)
+    # for voice in voices:
+    #     print(voice)
      
     engine.setProperty('voice','zh') 
      
