@@ -55,8 +55,9 @@ def main():
         请根据以上资料回答问题, 并指出引用了资料的哪句话。
         ''')
         result = chain.invoke({"input": input_gpt})
+        print(result)
         audio_translate.text2audio(result)
-        print(information)
+        # print(information)
         try:
             time.sleep(100000)
         except KeyboardInterrupt:
