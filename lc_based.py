@@ -1,6 +1,7 @@
 import os
 import ai_api
-import audio_recorde 
+import time
+import audio_record
 import audio_translate
 
 import text_operation as to
@@ -32,8 +33,8 @@ def main():
             # exit()
         # 语音输入
         # print("等待输入：\n")
-        audio_path = "audio.pcm"
-        audio_recorde.record_audio(audio_path)
+        audio_path = "audio.wav"
+        audio_record.record_audio(audio_path)
         # 语音转译
         audio_translate.logging.basicConfig()
         client = audio_translate.Client()
@@ -53,8 +54,13 @@ def main():
         问题：[{query}]
         请根据以上资料回答问题, 并指出引用了资料的哪句话。
         ''')
-        print(chain.invoke({"input": input_gpt}))
-        # print(information)
+        result = chain.invoke({"input": input_gpt})
+        audio_translate.text2audio(result)
+        print(information)
+        try:
+            time.sleep(100000)
+        except KeyboardInterrupt:
+            print('---------------------------------')
 
 if __name__ == "__main__":
     main()

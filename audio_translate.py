@@ -68,19 +68,19 @@ class Client():
             file_object.close()
 
         self.ws.send(bytes(self.end_tag.encode('utf-8')))
-        print("send end tag success")
+        # print("send end tag success")
 
     def recv(self):
         try:
             while self.ws.connected:
                 result = str(self.ws.recv())
                 if len(result) == 0:
-                    print("receive result end")
+                    # print("receive result end")
                     break
                 result_dict = json.loads(result)
                 # 解析结果
-                if result_dict["action"] == "started":
-                    print("handshake success, result: " + result)
+                # if result_dict["action"] == "started":
+                #     print("handshake success, result: " + result)
 
                 if result_dict["action"] == "result":
                     result_1 = result_dict
@@ -108,11 +108,28 @@ class Client():
                     return
         except websocket.WebSocketConnectionClosedException:
             self.end_flag = True
-            print("receive result end")
+            # print("receive result end")
 
     def close(self):
         self.ws.close()
         print("connection closed")
+
+
+import pyttsx3
+def text2audio(text):
+    engine = pyttsx3.init()
+    engine.setProperty('rate',150) # 速率
+    engine.setProperty('volume',0.6) # 音量
+     
+    # voices = engine.getProperty('voices') # 获取语音合成器
+    for voice in voices:
+        print(voice)
+     
+    engine.setProperty('voice','zh') 
+     
+    engine.say(text)
+    engine.runAndWait()
+    engine.stop()
 
 
 # if __name__ == '__main__':
@@ -123,3 +140,4 @@ def test():
 
     client = Client()
     client.send(file_path)
+    

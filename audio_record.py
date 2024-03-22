@@ -13,6 +13,7 @@ RECORD_SECONDS = 15  # 录制时长（秒）
 def record_audio(output_file = "output.pcm"):
     
     # 创建PyAudio对象
+    print("flag")
     audio = pyaudio.PyAudio()
 
     #打开麦克风流
@@ -25,7 +26,6 @@ def record_audio(output_file = "output.pcm"):
     print("Recording...")
 
     frames = []
-
     try:
         for i in range(0, int(RATE / CHUNK * RECORD_SECONDS)):
          # 读取音频数据
